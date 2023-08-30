@@ -56,7 +56,7 @@ a {
   width: 100vw;
   margin: 0 auto;
 }
-li {
+.nav-li {
   cursor: pointer;
   text-align: center;
   width: 100%;
@@ -164,6 +164,16 @@ h2 {
   height: 90%;
   width: 90%;
 }
+.ul-teams {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 15px;
+  list-style: none;
+}
+.constructors-name {
+  font-weight: 700;
+  font-family: var(--font-family-main);
+}
 
 @media (orientation: portrait) {
   .f1-logo {
@@ -204,7 +214,7 @@ h2 {
   .nav-menu {
     flex-direction: row;
   }
-  li {
+  .nav-li {
     display: block;
     border: none;
   }
