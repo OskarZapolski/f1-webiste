@@ -14,22 +14,73 @@ body {
   overflow-x: hidden;
   width: 100vw;
 }
-nav {
-  padding-left: 10%;
-  padding-right: 10%;
-  width: 100vw;
-  height: 10vh;
+
+.nav {
+  z-index: 1;
   background-color: black;
-  position: fixed;
-  z-index: 2;
   color: white;
-  display: grid;
-  grid-template-columns: repeat(8, 1fr);
-  justify-content: center;
+  width: 100vw;
+  height: 5rem;
+  position: fixed;
+}
+.nav-toggle {
+  position: absolute;
+  cursor: pointer;
+  margin: 0rem 1rem;
+  right: 0;
+}
+a {
+  color: white;
+  font-size: 20xp;
+}
+.nav-toggle svg {
+  width: 1.5rem;
+}
+.close {
+  margin: 1rem;
+  display: none;
+}
+.menu {
+  margin: 1rem;
+}
+.nav-checkbox {
+  display: none;
+}
+.nav-menu {
+  display: flex;
+  flex-direction: column;
   align-items: center;
+
+  margin: 1rem;
+  background-color: black;
+  width: 100vw;
+  margin: 0 auto;
+}
+li {
+  cursor: pointer;
+  text-align: center;
+  width: 100%;
+  border-top: 1px solid beige;
+  padding: 1rem;
+  list-style: none;
+  display: none;
 }
 header {
   height: 100vh;
+}
+.home {
+  text-align: start;
+  display: block;
+  margin-right: auto;
+}
+#nav-checkbox:checked ~ ul.nav-menu li {
+  display: block;
+}
+#nav-checkbox:checked ~ label.nav-toggle .menu {
+  display: none;
+}
+#nav-checkbox:checked ~ label.nav-toggle .close {
+  display: block;
 }
 section {
   height: 100vh;
@@ -112,4 +163,49 @@ h2 {
 #img-race-start {
   height: 90%;
   width: 90%;
+}
+
+@media (orientation: portrait) {
+  .f1-logo {
+    padding-top: 40px;
+    width: 70%;
+    top: 4rem;
+    height: 45%;
+  }
+  header {
+    margin: 0 auto;
+    width: 80%;
+    height: 70vh;
+  }
+  h1 {
+    font-size: 40px;
+  }
+  h2 {
+    font-size: 3vh;
+
+    margin: 20px;
+    margin-top: 40px;
+  }
+  .main-text {
+    font-size: 2.3vh;
+  }
+  .wraper {
+    padding: 0;
+    display: grid;
+    grid-template-columns: 1fr;
+    margin: 0 20px;
+    gap: 20px;
+  }
+}
+@media (orientation: landscape) {
+  .nav-toggle {
+    display: none;
+  }
+  .nav-menu {
+    flex-direction: row;
+  }
+  li {
+    display: block;
+    border: none;
+  }
 }
