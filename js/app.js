@@ -1,5 +1,5 @@
-const ul = document.querySelector(".ul-teams");
 const teamLogoDivs = document.querySelectorAll("[data-key]");
+const LogoA = document.querySelectorAll(".img-logo-link");
 console.log(teamLogoDivs);
 
 fetch("http://ergast.com/api/f1/2023/constructors.json")
@@ -9,10 +9,12 @@ fetch("http://ergast.com/api/f1/2023/constructors.json")
       const p = document.createElement("p");
       const img = document.createElement("img");
       img.src = `img/teamLogo${i}.jpg`;
+
       img.className = "logo-team-img";
       p.textContent = data.MRData.ConstructorTable.Constructors[i].name;
       p.className = "constructors-name";
-      teamLogoDivs[i].appendChild(img);
+      img.alt = `logo teamu ${p.textContent} z przekierowaniem do ich strony`;
+      LogoA[i].appendChild(img);
       teamLogoDivs[i].appendChild(p);
     }
   })

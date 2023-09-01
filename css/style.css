@@ -62,6 +62,7 @@ a {
   width: 100%;
   border-top: 1px solid beige;
   padding: 1rem;
+
   list-style: none;
   display: none;
 }
@@ -191,25 +192,31 @@ h2 {
   font-family: var(--font-family-main);
 }
 .d-grid {
+  text-align: center;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 40px;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
 }
 [data-key="8"] {
   grid-column-start: 2;
 }
 [data-key] {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
   position: relative;
-  width: fit-content;
 }
 .logo-team-img {
   border-radius: 15%;
   margin: 0 auto;
-  display: block;
-  max-width: 80%;
-  max-height: 40%;
+  cursor: pointer;
+  max-width: 8vw;
+  max-height: 10%;
 }
 
 @media (orientation: portrait) {
@@ -219,10 +226,20 @@ h2 {
     top: 4rem;
     height: 45%;
   }
+  .d-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+  [data-key="8"] {
+    grid-column-start: 1;
+  }
   .both-img {
     max-width: 100%;
     max-height: 70%;
     transform: skewX(0deg);
+  }
+  .logo-team-img {
+    display: block;
+    max-width: 10vw;
   }
   header {
     margin: 0 auto;
@@ -254,10 +271,17 @@ h2 {
     display: none;
   }
   .nav-menu {
+    gap: 0;
+
     flex-direction: row;
   }
+
   .nav-li {
+    width: 17%;
     display: block;
     border: none;
+  }
+  .nav-race-info-link {
+    width: 9%;
   }
 }
