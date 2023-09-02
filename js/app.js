@@ -1,6 +1,9 @@
 const teamLogoDivs = document.querySelectorAll("[data-key]");
 const LogoA = document.querySelectorAll(".img-logo-link");
-console.log(teamLogoDivs);
+const imgsSlider = [...document.querySelectorAll(".img-slider")];
+const dots = document.querySelectorAll(".circle");
+const arrowLeft = document.querySelector(".arrow-left");
+const arrowRight = document.querySelector(".arrow-right");
 
 fetch("http://ergast.com/api/f1/2023/constructors.json")
   .then((response) => response.json())
@@ -19,3 +22,19 @@ fetch("http://ergast.com/api/f1/2023/constructors.json")
     }
   })
   .catch((err) => console.log(err));
+
+function nextSlide() {
+  let activeSlide = imgsSlider.findIndex((img) => {
+    return img.classList.contains("active");
+  });
+  imgsSlider[activeSlide].classList.remove("active");
+
+  if (activeSlide < imgsSlider.length - 1) {
+    activeSlide += 1;
+  } else {
+    activeSlide = 0;
+  }
+  imgsSlider[activeSlide].classList.add("active");
+}
+
+arrowRight.addEventListener("click", nextSlide);
