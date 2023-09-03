@@ -137,6 +137,9 @@ h1 {
 .arrow-left {
   left: 20%;
 }
+.active-dot {
+  background-color: black;
+}
 .arrow-right {
   right: 20%;
 }
