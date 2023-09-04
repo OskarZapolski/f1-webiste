@@ -5,7 +5,7 @@ const dots = [...document.querySelectorAll(".circle")];
 const arrowLeft = document.querySelector(".arrow-left");
 const arrowRight = document.querySelector(".arrow-right");
 
-fetch("http://ergast.com/api/f1/2023/constructors.json")
+fetch("http://ergast.com/api/f1/2023/constructors.json", { mode: "cors" })
   .then((response) => response.json())
   .then((data) => {
     for (let i = 0; i < data.MRData.ConstructorTable.Constructors.length; i++) {
@@ -22,6 +22,8 @@ fetch("http://ergast.com/api/f1/2023/constructors.json")
     }
   })
   .catch((err) => console.log(err));
+
+let indexInterval = setInterval(nextSlide, 2000);
 
 function findActives() {
   let activeSLide = imgsSlider.findIndex((img) => {
