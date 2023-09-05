@@ -5,6 +5,8 @@ const dots = [...document.querySelectorAll(".circle")];
 const arrowLeft = document.querySelector(".arrow-left");
 const arrowRight = document.querySelector(".arrow-right");
 
+let indexInterval;
+
 fetch("http://ergast.com/api/f1/2023/constructors.json", { mode: "cors" })
   .then((response) => response.json())
   .then((data) => {
@@ -23,21 +25,29 @@ fetch("http://ergast.com/api/f1/2023/constructors.json", { mode: "cors" })
   })
   .catch((err) => console.log(err));
 
-let indexInterval = setInterval(nextSlide, 2000);
+function setSliderInterval() {
+  indexInterval = setInterval(nextSlide, 2000);
+}
+setSliderInterval();
 
 function findActives() {
   let activeSLide = imgsSlider.findIndex((img) => {
-    return img.classList.contains("active");
+    return img.classList.contains("active-slide");
   });
   let activeDot = dots.findIndex((dot) => dot.classList.contains("active-dot"));
   return [activeSLide, activeDot];
 }
 function removeActive(activeSlide, activeDot) {
-  imgsSlider[activeSlide].classList.remove("active");
+  imgsSlider[activeSlide].classList.remove("active-slide");
   dots[activeDot].classList.remove("active-dot");
+}
+function addActive(activeSlide, activeDot) {
+  imgsSlider[activeSlide].classList.add("active-slide");
+  dots[activeDot].classList.add("active-dot");
 }
 
 function nextSlide() {
+  clearInterval(indexInterval);
   let activeSlide = findActives()[0];
   let activeDot = findActives()[1];
   removeActive(activeSlide, activeDot);
@@ -48,10 +58,13 @@ function nextSlide() {
     activeSlide = 0;
     activeDot = 0;
   }
-  imgsSlider[activeSlide].classList.add("active");
-  dots[activeDot].classList.add("active-dot");
+  addActive(activeSlide, activeDot);
+  setTimeout(() => {
+    setSliderInterval();
+  }, 1);
 }
 function prevSlide() {
+  clearInterval(indexInterval);
   let activeSlide = findActives()[0];
   let activeDot = findActives()[1];
   removeActive(activeSlide, activeDot);
@@ -62,8 +75,10 @@ function prevSlide() {
     activeSlide = imgsSlider.length - 1;
     activeDot = dots.length - 1;
   }
-  imgsSlider[activeSlide].classList.add("active");
-  dots[activeDot].classList.add("active-dot");
+  addActive(activeSlide, activeDot);
+  setTimeout(() => {
+    setSliderInterval();
+  }, 1);
 }
 
 dots.forEach((dot, i) => {
@@ -72,10 +87,10 @@ dots.forEach((dot, i) => {
     let activeDot = findActives()[1];
     removeActive(activeSlide, activeDot);
 
-    dot.classList.add("active-dot");
-    imgsSlider[i].classList.add("active");
+    addActive(activeSlide, activeDot);
   });
 });
 
 arrowRight.addEventListener("click", nextSlide);
 arrowLeft.addEventListener("click", prevSlide);
+body.addEventListener("scroll", showContent);
