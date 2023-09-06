@@ -4,8 +4,24 @@ const imgsSlider = [...document.querySelectorAll(".img-slider")];
 const dots = [...document.querySelectorAll(".circle")];
 const arrowLeft = document.querySelector(".arrow-left");
 const arrowRight = document.querySelector(".arrow-right");
+const hiddenElements = document.querySelectorAll(".hidden");
 
 let indexInterval;
+
+const observer = new IntersectionObserver(
+  (entries) => {
+    entries.forEach((entry) => {
+      console.log(entry);
+      if (entry.isIntersecting) {
+        entry.target.classList.add("show");
+      } else {
+        entry.target.classList.remove("show");
+      }
+    });
+  },
+  { threshold: 0.5 }
+);
+hiddenElements.forEach((el) => observer.observe(el));
 
 fetch("http://ergast.com/api/f1/2023/constructors.json", { mode: "cors" })
   .then((response) => response.json())
@@ -93,4 +109,3 @@ dots.forEach((dot, i) => {
 
 arrowRight.addEventListener("click", nextSlide);
 arrowLeft.addEventListener("click", prevSlide);
-body.addEventListener("scroll", showContent);

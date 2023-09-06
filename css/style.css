@@ -182,6 +182,18 @@ section {
   gap: 70px;
   padding-top: 20px;
 }
+.hidden {
+  opacity: 0;
+  transition: all 1s;
+}
+
+.show {
+  opacity: 1;
+}
+.reverse {
+  order: 2;
+  text-align: end;
+}
 .main-text {
   font-size: var(--font-size-main);
   line-height: 1.5;
