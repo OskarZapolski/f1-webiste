@@ -11,7 +11,6 @@ let indexInterval;
 const observer = new IntersectionObserver(
   (entries) => {
     entries.forEach((entry) => {
-      console.log(entry);
       if (entry.isIntersecting) {
         entry.target.classList.add("show");
       } else {
@@ -99,11 +98,16 @@ function prevSlide() {
 
 dots.forEach((dot, i) => {
   dot.addEventListener("click", () => {
+    clearInterval(indexInterval);
     let activeSlide = findActives()[0];
     let activeDot = findActives()[1];
+
     removeActive(activeSlide, activeDot);
 
-    addActive(activeSlide, activeDot);
+    addActive(i, i);
+    setTimeout(() => {
+      setSliderInterval();
+    }, 1);
   });
 });
 
